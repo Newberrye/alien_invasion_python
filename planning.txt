@@ -16,7 +16,7 @@ loop to create aliens to fill the upper portion of the screen. Checked
 Make the fleet move sideways and down until the entire fleet is shot
 down, an alien hits the ship, or an alien reaches the ground. If the
 entire fleet is shot down, we’ll create a new fleet. If an alien hits the
-ship or the ground, we’ll destroy the ship and create a new fleet.
+ship or the ground, we’ll destroy the ship and create a new fleet. Checked.
 
 Limit the number of ships the player can use, and end the game
-when the player has used up the allotted number of ships
+when the player has used up the allotted number of ships. Checked.
