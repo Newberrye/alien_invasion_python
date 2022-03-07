@@ -7,7 +7,7 @@ from alien import Alien
 from bullet import Bullet
 from button import Button
 from game_stats import GameStats
-from scoreboard import  Scoreboard
+from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
 
@@ -218,8 +218,8 @@ class AlienInvasion:
     def _check_fleet_edges(self):
         # Respond appropriately if any aliens have reached an edge.
         for alien in self.aliens.sprites():
-            if alien.rect.x == (self.screen.get_rect().right - alien.rect.x) \
-                    or alien.rect.x <= 0:
+            if alien.check_edges() or alien.rect.x <= 0:
+                self.timing = -1
                 self._change_fleet_direction()
                 break
 
@@ -234,7 +234,7 @@ class AlienInvasion:
             self.aliens.empty()
             self.bullets.empty()
 
-            # creat new fleet and center the ship.
+            # create new fleet and center the ship.
             self._create_fleet()
             self.ship.center_ship()
 
