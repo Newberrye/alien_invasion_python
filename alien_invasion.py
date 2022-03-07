@@ -42,6 +42,13 @@ class AlienInvasion:
         self.play_button = Button(self, 'Play')
 
     def run_game(self):
+        # Does a single loop of the game to load the before game screen
+        # Game is a black screen otherwise.
+        self._update_aliens()
+        self.ship.update()
+        self._update_bullets()
+        self._update_screen()
+
         # Start main loop for the game.
         while True:
             self._check_events()
@@ -92,6 +99,8 @@ class AlienInvasion:
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key == pygame.K_p:
+            self._start_game()
+        elif event.key == pygame.K_r:
             self._start_game()
 
     def _check_keyup_events(self, event):
@@ -153,6 +162,7 @@ class AlienInvasion:
                                                 True, True)
 
         if collisions:
+            # Figures out scoring
             for aliens in collisions.values():
                 self.stats.score += self.settings.alient_points * len(aliens)
             self.sb.prep_score()
