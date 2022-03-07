@@ -52,6 +52,23 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_screen()
 
+    def _update_screen(self):
+        # Update images on the screen, and flips to the new screen
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        self.aliens.draw(self.screen)
+
+        # Draws scoreboard information
+        self.sb.show_score()
+
+        # Draws the Play button if game state is inactive.
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+
+        pygame.display.flip()
+
     def _check_events(self):
         # Responds to keyboard and mouse events
         for event in pygame.event.get():
@@ -163,23 +180,6 @@ class AlienInvasion:
         # Looks for aliens hitting bottom of the screen
         self._check_aliens_bottom()
 
-    def _update_screen(self):
-        # Update images on the screen, and flips to the new screen
-        self.screen.fill(self.settings.bg_color)
-        self.ship.blitme()
-        for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
-        self.aliens.draw(self.screen)
-
-        # Draws scoreboard information
-        self.sb.show_score()
-
-        # Draws the Play button if game state is inactive.
-        if not self.stats.game_active:
-            self.play_button.draw_button()
-
-        pygame.display.flip()
-
     def _create_fleet(self):
         # Creates an Alien Fleet.
         # Creating an alien and find the number of aliens in  row
@@ -219,7 +219,6 @@ class AlienInvasion:
         # Respond appropriately if any aliens have reached an edge.
         for alien in self.aliens.sprites():
             if alien.check_edges() or alien.rect.x <= 0:
-                self.timing = -1
                 self._change_fleet_direction()
                 break
 
